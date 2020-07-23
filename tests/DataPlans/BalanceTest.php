@@ -18,12 +18,12 @@ class BalanceTest extends TestConfig
      * @test
      * Assert that a balance object is returned after a successful retrieve.
      */
-    public function retrieve_dataplans_balance_object()
+    public function retrieve_object()
     {
         $balance = DataPlansBalance::retrieve();
 
         $this->assertArrayHasKey('availableBalance', $balance, 'Key availableBalance not exist');
-        $this->assertIsFloat(floatval($balance['availableBalance']), 'availableBalance value must be float value');
+        $this->assertFinite(floatval($balance['availableBalance']), 'availableBalance value must be finite value');
     }
 
     /**
@@ -36,6 +36,17 @@ class BalanceTest extends TestConfig
         $balance->reload();
 
         $this->assertArrayHasKey('availableBalance', $balance, 'Key availableBalance not exist');
-        $this->assertIsFloat(floatval($balance['availableBalance']), 'availableBalance value must be float value');
+        $this->assertFinite(floatval($balance['availableBalance']), 'availableBalance value must be finite value');
+    }
+    
+    /**
+     * @test
+     * Assert that a balance object is has correct endpoint
+     */
+    public function endpoint()
+    {
+        $endpoint = DataPlansBalance::getUrl();
+
+        $this->assertStringEndsWith('v1/accountBalance', $endpoint, 'Endpoint not correct');
     }
 }

@@ -23,16 +23,15 @@ class DataPlansApiResource extends DataPlansObject
      * Returns an instance of the class given in $instance or raise an error.
      *
      * @param  string $instance
-     * @param  string $token
      *
      * @throws Exception
      *
      * @return DataPlansResource
      */
-    protected static function getInstance($instance, $token = null)
+    protected static function getInstance($instance)
     {
         if (class_exists($instance)) {
-            return new $instance($token);
+            return new $instance();
         }
 
         throw new Exception('Undefined class.');
@@ -42,15 +41,14 @@ class DataPlansApiResource extends DataPlansObject
      * Retrieves the resource.
      *
      * @param  string $instance
-     * @param  string $token
      *
      * @throws Exception|DataPlansException
      *
      * @return DataPlansBalance
      */
-    protected static function g_retrieve($instance, $url, $token = null)
+    protected static function doRetrieve($instance, $url)
     {
-        $resource = call_user_func(array($instance, 'getInstance'), $instance, $token);
+        $resource = call_user_func(array($instance, 'getInstance'), $instance);
         $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
 
@@ -63,15 +61,14 @@ class DataPlansApiResource extends DataPlansObject
      * @param  string $instance
      * @param  string $url
      * @param  array  $params
-     * @param  string $token
      *
      * @throws Exception|DataPlansException
      *
      * @return DataPlansBalance
      */
-    protected static function g_create($instance, $url, $params, $token = null)
+    protected static function doCreate($instance, $url, $params)
     {
-        $resource = call_user_func(array($instance, 'getInstance'), $instance, $token);
+        $resource = call_user_func(array($instance, 'getInstance'), $instance);
         $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
         $resource->refresh($result);
 
@@ -86,7 +83,7 @@ class DataPlansApiResource extends DataPlansObject
      *
      * @throws Exception|DataPlansException
      */
-    protected function g_update($url, $params)
+    protected function doUpdate($url, $params)
     {
         $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
         $this->refresh($result);
@@ -101,7 +98,7 @@ class DataPlansApiResource extends DataPlansObject
      *
      * @return DataPlansApiResource
      */
-    protected function g_destroy($url)
+    protected function doDestroy($url)
     {
         $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
         $this->refresh($result, true);
@@ -114,7 +111,7 @@ class DataPlansApiResource extends DataPlansObject
      *
      * @throws Exception|DataPlansException
      */
-    protected function g_reload($url)
+    protected function doReload($url)
     {
         $result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
         $this->refresh($result);
@@ -172,6 +169,7 @@ class DataPlansApiResource extends DataPlansObject
     /**
      * @param  string $url
      * @param  string $requestMethod
+     * @param  string $token
      * @param  array  $params
      *
      * @throws DataPlansException
@@ -201,6 +199,7 @@ class DataPlansApiResource extends DataPlansObject
     /**
      * @param  string $url
      * @param  string $requestMethod
+     * @param  string $token
      * @param  array  $params
      *
      * @throws DataPlansException
