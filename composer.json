@@ -28,7 +28,7 @@
     },
     "autoload": {
         "classmap": [
-            "lib/DataPlans/"
+            "lib/"
         ]
     }
 }

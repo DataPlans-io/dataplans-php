@@ -1,14 +1,14 @@
 <?php
-class DataPlansPlan extends DataPlansApiResource
+class DataPlansRegion extends DataPlansApiResource
 {
-    const ENDPOINT = 'plans';
+    const ENDPOINT = 'regions';
 
     /**
-     * Retrieves a plan.
+     * Retrieves a region.
      *
      * @param  string $token
      *
-     * @return DataPlansPlan
+     * @return DataPlansRegion
      */
     public static function retrieve()
     {
@@ -16,7 +16,7 @@ class DataPlansPlan extends DataPlansApiResource
     }
 
     /**
-     * Reload a plan request
+     * Reload a region request
      *
      * @see DataPlansApiResource::doReload()
      */

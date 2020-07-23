@@ -7,5 +7,7 @@ require_once dirname(__FILE__).'/DataPlans/Resource/DataPlansApiResource.php';
 require_once dirname(__FILE__).'/DataPlans/Exception/DataPlansException.php';
 
 // API Resources.
+require_once dirname(__FILE__).'/DataPlans/DataPlansCountry.php';
 require_once dirname(__FILE__).'/DataPlans/DataPlansBalance.php';
 require_once dirname(__FILE__).'/DataPlans/DataPlansPlan.php';
+require_once dirname(__FILE__).'/DataPlans/DataPlansRegion.php';

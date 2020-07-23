@@ -20,11 +20,11 @@ class PlanTest extends TestConfig
      */
     public function retrieve_object()
     {
-        $plan = DataPlansPlan::retrieve();
+        $object = DataPlansPlan::retrieve();
 
-        $this->assertInstanceOf('DataPlansPlan', $plan, 'Retrieve data is invalid');
-        if (!empty($plan)) {
-            $this->assertArrayHasKey('slug', $plan[0], 'Key slug not exist');
+        $this->assertInstanceOf('DataPlansPlan', $object, 'Retrieve data is invalid');
+        if (!empty($object)) {
+            $this->assertArrayHasKey('slug', $object[0], 'Key slug not exist');
         }
     }
 
@@ -34,12 +34,12 @@ class PlanTest extends TestConfig
      */
     public function reload()
     {
-        $plan = DataPlansPlan::retrieve();
-        $plan->reload();
+        $object = DataPlansPlan::retrieve();
+        $object->reload();
 
-        $this->assertInstanceOf('DataPlansPlan', $plan, 'Retrieve data is invalid');
-        if (!empty($plan)) {
-            $this->assertArrayHasKey('slug', $plan[0], 'Key slug not exist');
+        $this->assertInstanceOf('DataPlansPlan', $object, 'Retrieve data is invalid');
+        if (!empty($object)) {
+            $this->assertArrayHasKey('slug', $object[0], 'Key slug not exist');
         }
     }
 
