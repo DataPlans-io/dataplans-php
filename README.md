@@ -1,6 +1,6 @@
 # DataPlans PHP Client
 
-`dataplans-php` is a library designed specifically to connect with DataPlans API written in PHP.
+`dataplans-php` is a library designed specifically to connect with DataPlans API written in PHP. API document [here](https://app.dataplans.io/docs/v1#/)
 
 Please pop onto our community forum or contact [support@dataplans.io](mailto:support@dataplans.io) if you have any question regarding this library and the functionality it provides.
 
