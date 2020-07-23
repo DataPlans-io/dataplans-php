@@ -1,0 +1,10 @@
+# Editor
+.vscode
+
+# Structure
+vendor/
+composer.lock
+composer.phar
+
+# Extension
+.phpunit.*
