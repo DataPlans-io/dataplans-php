@@ -12,30 +12,44 @@ aliases:
 
 version: 2
 jobs:
+  php74:
+    docker:
+      - image: circleci/php:7.4-cli-jessie-node-browsers
+    steps:
+      - checkout
+      - *phpunit
+
+  php73:
+    docker:
+      - image: circleci/php:7.3-cli-jessie-node-browsers
+    steps:
+      - checkout
+      - *phpunit
+
   php72:
     docker:
-      - image: circleci/php:7.2-cli-browsers-legacy
+      - image: circleci/php:7.2-cli-jessie-node-browsers
     steps:
       - checkout
       - *phpunit
 
   php71:
     docker:
-      - image: circleci/php:7.1-cli-jessie-browsers-legacy
+      - image: circleci/php:7.1-cli-jessie-node-browsers
     steps:
       - checkout
       - *phpunit
 
   php70:
     docker:
-      - image: circleci/php:7.0-cli-jessie-browsers-legacy
+      - image: circleci/php:7.0-cli-jessie-node-browsers
     steps:
       - checkout
       - *phpunit
 
   php56:
     docker:
-      - image: circleci/php:5.6.38-cli-jessie-node-browsers
+      - image: circleci/php:5.6-cli-jessie-node-browsers
     steps:
       - checkout
       - *phpunit
@@ -44,6 +58,9 @@ workflows:
   version: 2
   dataplansphp:
     jobs:
+      - php74
+      - php73
+      - php72
       - php72
       - php71
       - php70

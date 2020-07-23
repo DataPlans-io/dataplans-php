@@ -1,14 +1,14 @@
 <?php
-class DataPlansBalance extends DataPlansApiResource
+class DataPlansRegion extends DataPlansApiResource
 {
-    const ENDPOINT = 'accountBalance';
+    const ENDPOINT = 'regions';
 
     /**
-     * Retrieves an account balance.
+     * Retrieves a region.
      *
      * @param  string $token
      *
-     * @return DataPlansBalance
+     * @return DataPlansRegion
      */
     public static function retrieve()
     {
@@ -16,7 +16,7 @@ class DataPlansBalance extends DataPlansApiResource
     }
 
     /**
-     * Reload an account balance request
+     * Reload a region request
      *
      * @see DataPlansApiResource::doReload()
      */
