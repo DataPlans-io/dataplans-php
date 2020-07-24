@@ -7,49 +7,49 @@ aliases:
         php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
         php composer-setup.php
         php -r "unlink('composer-setup.php');"
-        php ./composer.phar install
-        php ./vendor/bin/phpunit tests
+        php ./composer.phar install --prefer-dist --no-progress --no-suggest
+        php ./composer.phar run-script test
 
 version: 2
 jobs:
   php74:
     docker:
-      - image: circleci/php:7.4-cli-jessie-node-browsers
+      - image: circleci/php:7.4-cli
     steps:
       - checkout
       - *phpunit
 
   php73:
     docker:
-      - image: circleci/php:7.3-cli-jessie-node-browsers
+      - image: circleci/php:7.3-cli
     steps:
       - checkout
       - *phpunit
 
   php72:
     docker:
-      - image: circleci/php:7.2-cli-jessie-node-browsers
+      - image: circleci/php:7.2-cli
     steps:
       - checkout
       - *phpunit
 
   php71:
     docker:
-      - image: circleci/php:7.1-cli-jessie-node-browsers
+      - image: circleci/php:7.1-cli
     steps:
       - checkout
       - *phpunit
 
   php70:
     docker:
-      - image: circleci/php:7.0-cli-jessie-node-browsers
+      - image: circleci/php:7.0-cli
     steps:
       - checkout
       - *phpunit
 
   php56:
     docker:
-      - image: circleci/php:5.6-cli-jessie-node-browsers
+      - image: circleci/php:5.6-cli
     steps:
       - checkout
       - *phpunit
