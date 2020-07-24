@@ -131,6 +131,7 @@ class DataPlansApiResource extends DataPlansObject
      */
     protected function execute($url, $requestMethod, $token, $params = null)
     {
+        $url = trim($url, '/');
         if ($this->isPHPUnit()) {
             $result = $this->executeTest($url, $requestMethod, $token, $params);
         } else {
@@ -187,7 +188,7 @@ class DataPlansApiResource extends DataPlansObject
      */
     private function executeCurl($url, $requestMethod, $token, $params = null)
     {
-        $ch = curl_init(trim($url, '/'));
+        $ch = curl_init($url);
 
         curl_setopt_array($ch, $this->genOptions($requestMethod, $token, $params));
 
@@ -276,7 +277,7 @@ class DataPlansApiResource extends DataPlansObject
     private function genOptions($requestMethod, $token, $params)
     {
         $user_agent = 'DataPlans/' . self::LIB_VERSION . ' ';
-        $user_agent .= 'APIVersion/' . self::API_VERSION . ' ';
+        $user_agent .= 'APIVersion/' . self::getApiVersion() . ' ';
         $user_agent .= 'PHP/' . phpversion() . ' ';
 
         $options = array(
@@ -292,7 +293,7 @@ class DataPlansApiResource extends DataPlansObject
             CURLOPT_USERAGENT => $user_agent,
             CURLOPT_HTTPHEADER => array(
                 'Authorization: Bearer ' . $token,
-                'DataPlans-Version: ' . self::API_VERSION,
+                'DataPlans-Version: ' . self::getApiVersion(),
             ),
         );
 
@@ -330,11 +331,38 @@ class DataPlansApiResource extends DataPlansObject
     /**
      * Returns the api url
      *
-     * @param  string $endpoint
+     * @param  string
      */
     protected static function getApiUrl($endpoint = null)
     {
-        $mode = defined('DATAPLANS_API_MODE') ? DATAPLANS_API_MODE : self::API_MODE;
-        return self::API_PROTOCAL . '://' . $mode . '.' . self::API_DOMAIN . '/api/v' . self::API_VERSION . '/' . $endpoint;
+        return self::API_PROTOCAL . '://' . self::getApiMode() . '.' . self::API_DOMAIN . '/api/v' . self::getApiVersion() . '/' . $endpoint;
+    }
+    
+    /**
+     * Returns the api version
+     *
+     * @return  string
+     */
+    protected static function getApiVersion()
+    {
+        if (defined('DATAPLANS_API_VERSION')) {
+            return DATAPLANS_API_VERSION;
+        }
+
+        return self::API_VERSION;
+    }
+    
+    /**
+     * Returns the api mode
+     *
+     * @return  string
+     */
+    protected static function getApiMode()
+    {
+        if (defined('DATAPLANS_API_MODE')) {
+            return DATAPLANS_API_MODE;
+        }
+
+        return self::API_MODE;
     }
 }
