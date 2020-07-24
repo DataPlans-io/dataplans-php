@@ -14,8 +14,8 @@ Please pop onto our community forum or contact [support@dataplans.io](mailto:sup
 To run an automated test suite, make sure you already have a [PHPUnit](https://phpunit.de) in your local machine.
 Then run the PHPUnit:
 
-```ssh
-phpunit omise-php/tests
+```bash
+phpunit tests
 ```
 
 ## License
