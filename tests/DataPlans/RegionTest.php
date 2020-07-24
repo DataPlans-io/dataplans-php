@@ -24,7 +24,7 @@ class RegionTest extends TestConfig
 
         $this->assertInstanceOf('DataPlansRegion', $object, 'Retrieve data is invalid');
         if (!empty($object)) {
-            $this->assertArrayHasKey('slug', $object[0]);
+            $this->assertArrayHasKey('slug', $object[0], 'Key slug not exist');
         }
     }
 
@@ -39,18 +39,7 @@ class RegionTest extends TestConfig
 
         $this->assertInstanceOf('DataPlansRegion', $object, 'Retrieve data is invalid');
         if (!empty($object)) {
-            $this->assertArrayHasKey('slug', $object[0]);
+            $this->assertArrayHasKey('slug', $object[0], 'Key slug not exist');
         }
-    }
-
-    /**
-     * @test
-     * Assert that a country object is has correct endpoint
-     */
-    public function endpoint()
-    {
-        $endpoint = DataPlansRegion::getUrl();
-
-        $this->assertStringEndsWith('v1/regions', $endpoint, 'Endpoint not correct');
     }
 }

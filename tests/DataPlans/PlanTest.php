@@ -3,6 +3,7 @@ require_once dirname(__FILE__).'/TestConfig.php';
 
 class PlanTest extends TestConfig
 {
+    protected $slug;
     /**
      * @test
      * DataPlansPlan class must be contain some method below.
@@ -45,12 +46,15 @@ class PlanTest extends TestConfig
 
     /**
      * @test
-     * Assert that a plan object is has correct endpoint
+     * Assert that a plan object with slug is returned after a successful retrieve.
      */
-    public function endpoint()
+    public function retrieve_object_by_slug()
     {
-        $endpoint = DataPlansPlan::getUrl();
+        $slug = 'dtac-tourist-sim';
+        $object = DataPlansPlan::retrieve($slug);
 
-        $this->assertStringEndsWith('v1/plans', $endpoint, 'Endpoint not correct');
+        $this->assertInstanceOf('DataPlansPlan', $object, 'Retrieve data is invalid');
+        $this->assertArrayHasKey('slug', $object, 'Key slug not exist');
+        $this->assertEquals($slug, $object['slug']);
     }
 }

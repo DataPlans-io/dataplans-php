@@ -6,13 +6,14 @@ class DataPlansPlan extends DataPlansApiResource
     /**
      * Retrieves a plan.
      *
+     * @param  string $slug
      * @param  string $token
      *
      * @return DataPlansPlan
      */
-    public static function retrieve()
+    public static function retrieve($slug = '')
     {
-        return parent::doRetrieve(get_class(), self::getUrl());
+        return parent::doRetrieve(get_class(), self::getUrl($slug));
     }
 
     /**
@@ -28,10 +29,12 @@ class DataPlansPlan extends DataPlansApiResource
     /**
      * Returns endpoint url
      *
+     * @param  string $slug
      * @return string
      */
-    public static function getUrl()
+    public static function getUrl($slug = '')
     {
-        return parent::getApiUrl(self::ENDPOINT);
+        $endpoint = empty($slug) ? self::ENDPOINT : 'plan/'.$slug;
+        return parent::getApiUrl($endpoint);
     }
 }

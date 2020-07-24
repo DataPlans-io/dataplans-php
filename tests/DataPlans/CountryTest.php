@@ -24,7 +24,7 @@ class CountryTest extends TestConfig
 
         $this->assertInstanceOf('DataPlansCountry', $object, 'Retrieve data is invalid');
         if (!empty($object)) {
-            $this->assertArrayHasKey('countryCode', $object[0]);
+            $this->assertArrayHasKey('countryCode', $object[0], 'Key countryCode not exist');
         }
     }
 
@@ -39,18 +39,23 @@ class CountryTest extends TestConfig
 
         $this->assertInstanceOf('DataPlansCountry', $object, 'Retrieve data is invalid');
         if (!empty($object)) {
-            $this->assertArrayHasKey('countryCode', $object[0]);
+            $this->assertArrayHasKey('countryCode', $object[0], 'Key countryCode not exist');
         }
     }
 
     /**
      * @test
-     * Assert that a country object is has correct endpoint
+     * Assert that a country object with slug is returned after a successful retrieve.
      */
-    public function endpoint()
+    public function retrieve_object_by_slug()
     {
-        $endpoint = DataPlansCountry::getUrl();
+        $slug = 'th';
+        $object = DataPlansCountry::retrieve($slug);
 
-        $this->assertStringEndsWith('v1/countries', $endpoint, 'Endpoint not correct');
+        $this->assertInstanceOf('DataPlansCountry', $object, 'Retrieve data is invalid');
+        if (!empty($object)) {
+            $this->assertArrayHasKey('slug', $object[0], 'Key slug not exist');
+            $this->assertArrayHasKey('retailPrice', $object[0], 'Key retailPrice not exist');
+        }
     }
 }
