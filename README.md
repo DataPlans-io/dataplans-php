@@ -1,7 +1,7 @@
 # DataPlans PHP Client
 
 ![PHPUnit](https://github.com/thebusted/dataplans-php/workflows/PHPUnit/badge.svg)
-![CircleCI](https://circleci.com/gh/thebusted/dataplans-php.svg?style=shield)
+![CircleCI](https://circleci.com/gh/thebusted/dataplans-php.png?style=shield)
 
 `dataplans-php` is a library designed specifically to connect with DataPlans API written in PHP. API document [here](https://app.dataplans.io/docs/v1#/)
 
