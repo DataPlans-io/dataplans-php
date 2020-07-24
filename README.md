@@ -14,7 +14,7 @@ Please pop onto our community forum or contact [support@dataplans.io](mailto:sup
 
 ## Configuration
 
-### • Config your public and secret keys
+### • Config your token and environment
 
 This API allows you to buy travel eSIM data plans in QR code format. Sign up and receive your api-key to test the API. (these can be found at the [DataPlans Dashboard](https://esims.dataplans.io/dashboard).).
 
