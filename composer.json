@@ -30,5 +30,8 @@
         "classmap": [
             "lib/"
         ]
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }

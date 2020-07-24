@@ -131,8 +131,7 @@ class DataPlansApiResource extends DataPlansObject
      */
     protected function execute($url, $requestMethod, $token, $params = null)
     {
-        // If this class is execute by phpunit > get test mode.
-        if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME'])) {
+        if ($this->isPHPUnit()) {
             $result = $this->executeTest($url, $requestMethod, $token, $params);
         } else {
             $result = $this->executeCurl($url, $requestMethod, $token, $params);
@@ -165,6 +164,16 @@ class DataPlansApiResource extends DataPlansObject
     {
         return count($array);
     }
+    
+    /**
+     * Checks if this class is execute by phpunit.
+     *
+     * @return boolean
+     */
+    protected function isPHPUnit()
+    {
+        return preg_match('/phpunit/', $_SERVER['SCRIPT_NAME']);
+    }
 
     /**
      * @param  string $url
@@ -178,7 +187,7 @@ class DataPlansApiResource extends DataPlansObject
      */
     private function executeCurl($url, $requestMethod, $token, $params = null)
     {
-        $ch = curl_init($url);
+        $ch = curl_init(trim($url, '/'));
 
         curl_setopt_array($ch, $this->genOptions($requestMethod, $token, $params));
 
@@ -192,6 +201,11 @@ class DataPlansApiResource extends DataPlansObject
 
         // Close.
         curl_close($ch);
+
+        // Debug
+        if ($this->isPHPUnit()) {
+            print PHP_EOL .'================================================'. PHP_EOL .$url. PHP_EOL .'================================================'. PHP_EOL;
+        }
 
         return $result;
     }
@@ -320,6 +334,7 @@ class DataPlansApiResource extends DataPlansObject
      */
     protected static function getApiUrl($endpoint = null)
     {
-        return self::API_PROTOCAL . '://' . self::API_MODE . '.' . self::API_DOMAIN . '/api/v' . self::API_VERSION . '/' . $endpoint;
+        $mode = defined('DATAPLANS_API_MODE') ? DATAPLANS_API_MODE : self::API_MODE;
+        return self::API_PROTOCAL . '://' . $mode . '.' . self::API_DOMAIN . '/api/v' . self::API_VERSION . '/' . $endpoint;
     }
 }

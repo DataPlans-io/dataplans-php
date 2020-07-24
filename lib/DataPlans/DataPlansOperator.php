@@ -1,15 +1,15 @@
 <?php
-class DataPlansCountry extends DataPlansApiResource
+class DataPlansOperator extends DataPlansApiResource
 {
-    const ENDPOINT = 'countries';
+    const ENDPOINT = 'operators';
 
     /**
-     * Retrieves a country.
+     * Retrieves a operator.
      *
      * @param  string $slug
      * @param  string $token
      *
-     * @return DataPlansCountry
+     * @return DataPlansOperator
      */
     public static function retrieve($slug = '')
     {
@@ -17,7 +17,7 @@ class DataPlansCountry extends DataPlansApiResource
     }
 
     /**
-     * Reload a country request
+     * Reload a operator request
      *
      * @see DataPlansApiResource::doReload()
      */

@@ -38,15 +38,4 @@ class BalanceTest extends TestConfig
         $this->assertArrayHasKey('availableBalance', $balance, 'Key availableBalance not exist');
         $this->assertFinite(floatval($balance['availableBalance']), 'availableBalance value must be finite value');
     }
-    
-    /**
-     * @test
-     * Assert that a balance object is has correct endpoint
-     */
-    public function endpoint()
-    {
-        $endpoint = DataPlansBalance::getUrl();
-
-        $this->assertStringEndsWith('v1/accountBalance', $endpoint, 'Endpoint not correct');
-    }
 }
